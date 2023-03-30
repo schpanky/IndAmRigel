@@ -33,7 +33,9 @@ iptables -A FORWARD -s "${ip}" -j DROP
 
 echo "Added ${ip} to iptables deny list"
 # clear log, comment out if not required
-sudo truncate -s 0 /etc/openvpn/openvpn.log
+truncate -s 0 /etc/openvpn/openvpn.log
+echo " "
+echo "Cleared OpenVPN log"
 #
 done <<< "${IPS2BAN}"
 
