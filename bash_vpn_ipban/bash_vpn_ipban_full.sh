@@ -9,7 +9,7 @@
 #   Set FILE_PATH to your openvpn.log
 #
 #   from command line, run:
-#   sudo sed -i 's/\r//' setup.sh
+#   sudo sed -i 's/\r//' bash_vpn_ipban_full.sh
 #   to sanitize as unix carriage returns
 #
 #   sudo chmod +x bash_vpn_ipban_full.sh
@@ -32,9 +32,10 @@ iptables -A INPUT -s "${ip}" -j DROP
 iptables -A FORWARD -s "${ip}" -j DROP
 
 echo "Added ${ip} to iptables deny list"
+cp /dev/null>>/etc/openvpn/openvpn.log
 done <<< "${IPS2BAN}"
 
-#Save iptables rules
+#Save iptables rules, create file if doesn't exist?
 #touch /etc/iptables/rules.v4.automated.txt
 #iptables-save > /etc/iptables/rules.v4.automated.txt
 
