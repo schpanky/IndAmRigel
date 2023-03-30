@@ -32,7 +32,9 @@ iptables -A INPUT -s "${ip}" -j DROP
 iptables -A FORWARD -s "${ip}" -j DROP
 
 echo "Added ${ip} to iptables deny list"
-cp /dev/null>>/etc/openvpn/openvpn.log
+# clear log, comment out if not required
+sudo truncate -s 0 /etc/openvpn/openvpn.log
+#
 done <<< "${IPS2BAN}"
 
 #Save iptables rules, create file if doesn't exist?
